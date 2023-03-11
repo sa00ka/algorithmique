@@ -1,0 +1,61 @@
+ALGORITHM sum_distinct
+VAR
+    set1 : ARRAY_OF INTEGER[4];
+    set2 : ARRAY_OF INTEGER[5];
+    sum,i,j:INTEGER;
+    diff: BOOLEAN;
+BEGIN
+    sum:=0;
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        diff:= TRUE;
+        FOR j FROM 0 TO set2.length-1 STEP 1  DO
+            IF (set1[i]=set2[j]) THEN
+                diff:=FALSE;
+            END_IF
+        END_FOR
+        IF (diff:= TRUE) THEN
+            sum:=sum+set1[i];
+        END_IF
+    END_FOR
+    FOR j FROM 0 TO set2.length-1 STEP 1  DO
+        diff:= TRUE;
+        FOR i FROM 0 TO set1.length-1 STEP 1  DO
+            IF (set2[j]=set1[i]) THEN
+                diff:=FALSE;
+            END_IF
+        END_FOR
+        IF (diff:= TRUE) THEN
+            sum:=sum+set2[j];
+        END_IF
+    END_FOR
+    Write(sum);
+END
+
+// 2eme methode plus simple
+// on calcule sum la somme de tous les elements de deux tableaux
+//puis chaque fois qu'on trouve un element qui se repete on decremente son double de "sum"
+
+ALGORITHM sum_distinct
+VAR
+    set1 : ARRAY_OF INTEGER[4];
+    set2 : ARRAY_OF INTEGER[5];
+    sum,i,j:INTEGER;
+BEGIN
+    sum:=0
+    //on calcule la somme de tous les elements
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        sum:=sum+set1[i];
+    END_FOR
+    FOR j FROM 0 TO set2.length-1 STEP 1  DO
+        sum:=sum+set2[j];
+    END_FOR
+    //on elimine les element repetes de la somme
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        FOR j FROM 0 TO set2.length-1 STEP 1  DO
+            IF (set1[i]=set2[j]) THEN
+                sum:=sum-2*set1[i];
+            END_IF
+    END_FOR
+    // il ne reste que la somme des elements distincts
+    Write(sum);
+END

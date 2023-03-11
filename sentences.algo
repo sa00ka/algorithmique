@@ -1,0 +1,47 @@
+ALGORITHM sentences
+VAR
+    i,m,v:INTEGER;
+    sent:STRING[50];
+BEGIN
+    
+    m:=0;
+    v:=0;
+    FOR i FROM 0 TO sent.length-1 STEP 1  DO
+        IF (sent[i]=' ') THEN
+            m++;
+        END_IF
+        IF (ToLower(sent[i])='a' OR ToLower(sent[i])='e' OR ToLower(sent[i])='o' OR ToLower(sent[i])='u'OR ToLower(sent[i])='i' OR ToLower(sent[i])='y') THEN
+            v++;
+        END_IF
+        IF (sent[i]='.') THEN
+            BREAK;
+        END_IF
+    END_FOR
+    Write('this sentence contain',m,'words and',v,'vowels');
+END
+
+// 2eme methode avec switch case
+
+ALGORITHM sentences
+VAR
+    i,m,v:INTEGER;
+    sent:STRING[50];
+BEGIN
+    
+    m:=0;
+    v:=0;
+    FOR i FROM 0 TO sent.length-1 STEP 1  DO
+        SWITCH (ToLower(sent[i])) DO
+            case '.' : BREAK; 
+            case ' ' : m++; BREAK;
+            case 'a' : v++  BREAK; 
+            case 'e' : v++  BREAK; 
+            case 'o' : v++  BREAK; 
+            case 'u' : v++  BREAK; 
+            case 'i' : v++  BREAK; 
+            case 'y' : v++  BREAK; 
+            default : BREAK;
+        END_SWITCH
+    END_FOR
+    Write('this sentence contain',m,'words and',v,'vowels');
+END
